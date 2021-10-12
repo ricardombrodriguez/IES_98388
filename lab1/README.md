@@ -8,6 +8,12 @@ App name: *MyWeatherRadar*
 mvn archetype:generate -DgroupId=com.MyWeatherRadar.app -DartifactId=MyWeatherRadar -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false 
 ```
 
+groupId: Domain of the project
+
+artifactId: Name of the project
+
+version: Version of the project
+
 # API request:
 
 Start by analyzing the struct of the API requests and the replies (e.g.: check the 5-days aggregateforecast for a location - “Previsão Meteorológica Diária até 5 dias agregada por Local”). You may use any HTTP client, such as the browser or the curl utility. For example, to get a 5-day forecast for Aveiro (which has the internal id=1010500): 
@@ -28,5 +34,22 @@ For example, on the properties code block we can change the Java version to "11"
 
 Build tools allow to state the project dependencies on external artifacts. Maven will be able to retrieve well-known dependencies from the Maven central repository automatically.
 
-In this project, we will need to open a HTTP connection, create a well-formatted GET request, get the JSON response, process the response content.  Instead of programming all these (demanding) steps by hand, we should use a good library, or, in Maven terms, an artifact
+In this project, we will need to open a HTTP connection, create a well-formatted GET request, get the JSON response, process the response content.  Instead of programming all these (demanding) steps by hand, we should use a good library, or, in Maven terms, an artifact.
+
+Tools to be used during this project: *Retrofit* and *Gson*.
+
+Google’s Gson is a Java library that can be used to convert Java Objects into their JSON representation; Square’s Retrofit is a type-safe HTTP client for Java, that allows mapping an external REST API into a local (Java) interface.
+
+The next step is to declare both of these dependencies in the POM file (*pom.xml*).
+
+In POM, we also have to declare direct dependencies, because some artifacts depend on others.
+
+# After developing the project
+
+Compile and run the project, either from the IDE or the CLI.
+
+```
+mvn package #get dependencies, compiles the project and creates the jar 
+mvn exec:java -Dexec.mainClass="weather.WeatherStarter" #adapt to match your own package and class name  
+```
 
