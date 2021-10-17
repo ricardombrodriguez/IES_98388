@@ -1,16 +1,38 @@
 # LAB 01
 
+Simple maven introduction: https://www.devdungeon.com/content/maven-basics-java-developers
+
+# What is Maven?
+
+Maven is a build tool that automates the compiling, dependency management, packaging, and even deployment of Java applications. Some Maven's alternatives are ANT and GRADLE.
+
+# Why use Maven instead of the typical **javac**?
+
+Maven advantages:
+
+- Generate pre-built templates for different types of projects, which is very effective
+- Maven manages building the .jar, which requires manifest files and other tedious configuration if done by hand, it can also create windows.exe files, Mac .app files and Devian/Ubuntu based .deb packages
+- Very extensible with many community plugins, as it is broadly used in the Java community
+- Easy to run on the command line, and supported by all major IDEs (VSCode included)
+- Other people can easy load and build your project using Maven
+- Install packages to your local repository
+- Deploy packages to remote repositories
+- Generate JavaDoc documentation in HTML format
+
 # Creating a Maven project:
 
 App name: *MyWeatherRadar*
 
+Maven has a concept called *archetypes*, which are essentially prebuilt project templates that include folder structure and files needed to get started for a specific type of project. There are tons of archetypes out there that come with templates for building things like command line apps, empty projects, gui apps, and web apps. There is at least one archetype worth memorizing and that is the maven-archetype-quickstart. This generates the simplest possible project with one source file ready for us to edit.
+
 ```
 mvn archetype:generate -DgroupId=com.MyWeatherRadar.app -DartifactId=MyWeatherRadar -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false 
 ```
+The example just above also includes the optional -DinteractiveMode=false flag, which disables the prompt to press Y and review the information. Leave interactiveMode set to true if you do want to review the information before it creates the project.
 
-groupId: Domain of the project
+groupId: Namespace of the project / website (ex: GitHub account)
 
-artifactId: Name of the project
+artifactId: Name of the package within the domain (groupId)
 
 version: Version of the project
 
@@ -29,6 +51,24 @@ A Project Object Model or POM is the fundamental unit of work in Maven. It is an
 Some of the configuration that can be specified in the POM are the project dependencies, the plugins or goals that can be executed, the build profiles, and so on. Other information such as the project version, description, developers, mailing lists and such can also be specified.
 
 For example, on the properties code block we can change the Java version to "11".
+
+# Resources
+
+Sometimes your application needs to include static resources like images or icons. You can specify special directories for Maven to look for resources. These resources will be packed in to the JAR. The default directory which requires no configuration is src/main/resources/.
+
+To read and write files from the resource directory, you want to use a special function, java.lang.Class.getResource(). Example:
+
+```
+// Get a URL that points to the file you want
+java.net.URL filepath = getClass().getResource("/src/main/resources/test.txt");
+// Then pass the URL to something that will open the file like `javax.imageio.ImageIO.read()`
+
+// You can also use `java.lang.ClassLoader.getResourceAsStream()` to get a `java.io.InputStream`
+java.io.InputStream instream = getClass().getResourceAsStream("/src/main/resources/largefile.bin");
+// Then use something like `java.io.BufferedReader` to read the stream.
+```
+
+If you want to change or add more directories, you can add a configuration in the build section of your pom.xml.
 
 # Declaring project dependencies
 
@@ -50,6 +90,13 @@ Compile and run the project, either from the IDE or the CLI.
 
 ```
 mvn package #get dependencies, compiles the project and creates the jar 
-mvn exec:java -Dexec.mainClass="weather.WeatherStarter" #adapt to match your own package and class name  
+mvn exec:java -Dexec.mainClass="weather.WeatherStarter" -D exec.cleanupDaemonThreads=false #adapt to match your own package and class name  
+```
+
+# Maven commands
+
+```
+mvn package #get dependencies, compiles the project and creates the jar 
+mvn exec:java -Dexec.mainClass="weather.WeatherStarter" -D exec.cleanupDaemonThreads=false #adapt to match your own package and class name  
 ```
 

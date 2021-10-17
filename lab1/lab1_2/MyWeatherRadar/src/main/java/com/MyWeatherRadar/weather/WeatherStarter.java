@@ -14,7 +14,6 @@ import java.util.logging.Logger;
  */
 public class WeatherStarter {
 
-    private static final int CITY_ID_AVEIRO = 1010500;
     /*
     loggers provide a better alternative to System.out.println
     https://rules.sonarsource.com/java/tag/bad-practice/RSPEC-106
@@ -22,6 +21,8 @@ public class WeatherStarter {
     private static final Logger logger = Logger.getLogger(WeatherStarter.class.getName());
 
     public static void  main(String[] args ) {
+
+        final int CITY_ID = Integer.parseInt(args[0]);
 
         /*
         get a retrofit instance, loaded with the GSon lib to convert JSON into objects
@@ -32,7 +33,7 @@ public class WeatherStarter {
                 .build();
 
         IpmaService service = retrofit.create(IpmaService.class);
-        Call<IpmaCityForecast> callSync = service.getForecastForACity(CITY_ID_AVEIRO);
+        Call<IpmaCityForecast> callSync = service.getForecastForACity(CITY_ID);
 
         try {
             Response<IpmaCityForecast> apiResponse = callSync.execute();
