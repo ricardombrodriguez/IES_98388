@@ -1,4 +1,4 @@
-package weather.ipma_client;
+package com.MyWeatherRadar.weather.ipma_client;
 
 
 import retrofit2.Call;
