@@ -93,10 +93,75 @@ mvn package #get dependencies, compiles the project and creates the jar
 mvn exec:java -Dexec.mainClass="weather.WeatherStarter" -D exec.cleanupDaemonThreads=false #adapt to match your own package and class name  
 ```
 
-# Maven commands
+# Maven arguments
+
+The *mvn exec:java* command can also receive command-line arguments.
+```
+mvn exec:java -Dexec.mainClass="weather.WeatherStarter" -D exec.cleanupDaemonThreads=false Dexec.args="'argument separated with space' 'another one'"
+```
+
+When executing a java file with Maven, we can insert multiple arguments, separated with spaces as shown above.
+
+In the Java file, arguments are accepted as in normal Java (with args[n])
+
+# Logging
+
+Logging is a powerful aid for understanding and debugging program's run-time behavior. Logs capture and persist the important data and make it available for analysis at any point in time. Example: Git command *git log*, it's basically a book with the history of the project.
+
+**How to enable logging?**
+
+All the logging frameworks discussed in the article share the notion of loggers, appenders and layouts. Enabling logging inside the project follows three common steps:
+
+- Adding needed libraries
+- Configuration
+- Placing log statements
+
+# Repository history
+
+To see the repo history, we can type the following command:
 
 ```
-mvn package #get dependencies, compiles the project and creates the jar 
-mvn exec:java -Dexec.mainClass="weather.WeatherStarter" -D exec.cleanupDaemonThreads=false #adapt to match your own package and class name  
+git log --reverse --oneline
 ```
+
+# Docker and its advantages of using it
+
+How is 'simply installing everything' simpler than just building an image from a Dockerfile that defines everything you need?
+
+The key advantage of Docker is that all your dependencies are written in code. So if you have a Dockerfile in your repository, the code will run no matter where it is running, as long as Docker is installed. That's very powerful.
+
+Second, it's isolation. If you have two apps running on the same server, one can easily use Python 3.5 while the other uses 3.9.
+
+It gets immensely more complicated setting up a dev environment and dealing with version and dependency conflicts, that's another factor of why we should use docker.
+
+It's easier because you can run everything up in just one command..
+
+# Docker container
+
+Containers only use host machine kernel, instead of using virtual machines.
+It can start up in seconds instead of minutes, it uses less memory.
+A container is a running instance of an image (snapshot of the system at a particular time)
+
+The OS, software and application code is confined in a container.
+
+Dockerfile -> text file with a list of steps to perform to create that image.
+
+Run dockerfile -> Get an image -> Run the image -> Container
+
+# Docker commands
+
+docker build -t image_name ->  Build the container image using the docker build command
+
+docker run -dp 3000:3000 image_name -> Start the container. What about the the -d and -p flags? We’re running the new container in “detached” mode (in the background) and creating a mapping between the host’s port 3000 to the container’s port 3000. Without the port mapping, we wouldn’t be able to access the application.
+
+# How to use another maven project as a dependency
+
+Separate both projects into different maven projects.
+
+Steps:
+
+- Add a dependency in the *pom.xml* of the project we want to use as a dependency (use IpmaApiClient as a dependency in the WeatherForecastByCity pom.xml file)
+- ```mvn package``` in the dependency project (ImpaApiClient)
+- ```mvn install:install-file -Dfile="/home/ricardo/Documents/IES_98388/lab1/lab1_5/IpmaApiClient/IpmaApiClient/target/IpmaApiClient-1.0-SNAPSHOT.jar" -DgroupId="com.weather.app" -DartifactId="IpmaApiClient" -Dversion="1.0-SNAPSHOT" -Dpackaging=jar``` (insert this command inside the main maven project)
+- ```mvn package``` in the main maven project
 

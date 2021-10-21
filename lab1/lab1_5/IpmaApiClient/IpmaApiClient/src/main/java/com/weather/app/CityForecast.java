@@ -8,6 +8,30 @@ import com.google.gson.annotations.SerializedName;
  */
 public class CityForecast {
 
+    @SerializedName("idRegiao")
+    @Expose
+    private int idRegiao;
+    @SerializedName("idAreaAviso")
+    @Expose
+    private String idAreaAviso;
+    @SerializedName("idConcelho")
+    @Expose
+    private int idConcelho;
+    @SerializedName("globalIdLocal")
+    @Expose
+    private int globalIdLocal;
+    @SerializedName("latitude")
+    @Expose
+    private String latitude;
+    @SerializedName("idDistrito")
+    @Expose
+    private int idDistrito;
+    @SerializedName("local")
+    @Expose
+    private String local;
+    @SerializedName("longitude")
+    @Expose
+    private String longitude;
     @SerializedName("precipitaProb")
     @Expose
     private String precipitaProb;
@@ -26,15 +50,9 @@ public class CityForecast {
     @SerializedName("classWindSpeed")
     @Expose
     private Integer classWindSpeed;
-    @SerializedName("longitude")
-    @Expose
-    private String longitude;
     @SerializedName("forecastDate")
     @Expose
     private String forecastDate;
-    @SerializedName("latitude")
-    @Expose
-    private String latitude;
 
     public String getPrecipitaProb() {
         return precipitaProb;
@@ -84,6 +102,54 @@ public class CityForecast {
         this.classWindSpeed = classWindSpeed;
     }
 
+    public String getForecastDate() {
+        return forecastDate;
+    }
+
+    public void setForecastDate(String forecastDate) {
+        this.forecastDate = forecastDate;
+    }
+
+    public int idRegiao() {
+        return idRegiao;
+    }
+
+    public void setIdRegiao(int idRegiao) {
+        this.idRegiao = idRegiao;
+    }
+
+    public String getIdAreaAviso() {
+        return idAreaAviso;
+    }
+
+    public void setIdAreaAviso(String idAreaAviso) {
+        this.idAreaAviso = idAreaAviso;
+    }
+
+    public int idConcelho() {
+        return idConcelho;
+    }
+
+    public void setIdConcelho(int idConcelho) {
+        this.idConcelho = idConcelho;
+    }
+
+    public int getGlobalIdLocal() {
+        return globalIdLocal;
+    }
+
+    public void setGlobalIdLocal(int globalIdLocal) {
+        this.globalIdLocal = globalIdLocal;
+    }
+
+    public Integer getIdDistrito() {
+        return idDistrito;
+    }
+
+    public void setIdDistrito(Integer idDistrito) {
+        this.idDistrito = idDistrito;
+    }
+
     public String getLongitude() {
         return longitude;
     }
@@ -92,12 +158,12 @@ public class CityForecast {
         this.longitude = longitude;
     }
 
-    public String getForecastDate() {
-        return forecastDate;
+    public String getLocal() {
+        return local;
     }
 
-    public void setForecastDate(String forecastDate) {
-        this.forecastDate = forecastDate;
+    public void setLocal(String local) {
+        this.local = local;
     }
 
     public String getLatitude() {
