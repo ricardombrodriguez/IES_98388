@@ -303,28 +303,28 @@ Maven is a very effective build tool to use when developing a project for two ma
 
 
 
-## C) What would be a likely sequence of Git commands required to contribute with a new feature to a given project? (i.e., get a fresh copy, develop some increment, post back the added functionality)**
+## C) What would be a likely sequence of Git commands required to contribute with a new feature to a given project? (i.e., get a fresh copy, develop some increment, post back the added functionality)
 
 After adding new functionalities to the original project (project1) in another folder (project2), we can do the following steps:
 
-```git init``` -> if there's no git repository estabilished
-``` git add *``` -> add all files
-```git commit -m "message"``` -> commit
-```git remote add origin [original project github repository link]``` -> it will start pushing to the original project1 remote repository after a *push* command
-```git push``` -> push to the original repository
-```git log --reverse --oneline``` -> (optional command) this will present the repository history
+- ```git init``` -> if there's no git repository estabilished
+- ``` git add *``` -> add all files
+- ```git commit -m "message"``` -> commit
+- ```git remote add origin [original project github repository link]``` -> it will start pushing to the original project1 remote repository after a *push* command
+- ```git push``` -> push to the original repository
+- ```git log --reverse --oneline``` -> (optional command) this will present the repository history
 
 
 
 
-## D) There are strong opinions on how to write Git commit messages… Find some best practices online and give your own informed recommendations on how to write good commit message (in a team project).**
+## D) There are strong opinions on how to write Git commit messages… Find some best practices online and give your own informed recommendations on how to write good commit message (in a team project).
 
 The most important thing when writing commit messages is clarity. It's important to make sure others will understand clearly what has been done in that commit and that the message is informative. For example, after finishing some function or a code file, we should write down the deed.
 
 Examples:
-```git commit -m "lab1_5 done"```
-```git commit -m "xyz function completed"```
-```git commit -m "abc bug fixed"```
+- ```git commit -m "lab1_5 done"```
+- ```git commit -m "xyz function completed"```
+- ```git commit -m "abc bug fixed"```
 
 It doesn't need to have few characters. But each commit message should summarize all the work that has been done in the commit span.
 
