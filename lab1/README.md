@@ -272,7 +272,7 @@ Note: exercise 1.2 is the result of the 1.3 (after pushing 1.3 files to 1.2)
 
 
 
-**A) Maven has three lifecycles: clean, site and default. Explain the main phases in the default lifecycle.**
+## A) Maven has three lifecycles: clean, site and default. Explain the main phases in the default lifecycle.**
 
 The maven default lifecycle is the main one as it's responsible for project deployment and it consists of many phases as described below:
 
@@ -292,7 +292,7 @@ It's important to know that running a specific phase will also execute all previ
 
 
 
-**B) Maven is a build tool; is it appropriate to run your project to?**
+## B) Maven is a build tool; is it appropriate to run your project to?**
 
 Maven is a very effective build tool to use when developing a project for two main reasons:
 
@@ -303,7 +303,7 @@ Maven is a very effective build tool to use when developing a project for two ma
 
 
 
-**C) What would be a likely sequence of Git commands required to contribute with a new feature to a given project? (i.e., get a fresh copy, develop some increment, post back the added functionality)**
+## C) What would be a likely sequence of Git commands required to contribute with a new feature to a given project? (i.e., get a fresh copy, develop some increment, post back the added functionality)**
 
 After adding new functionalities to the original project (project1) in another folder (project2), we can do the following steps:
 
@@ -317,7 +317,7 @@ After adding new functionalities to the original project (project1) in another f
 
 
 
-**D) There are strong opinions on how to write Git commit messages… Find some best practices online and give your own informed recommendations on how to write good commit message (in a team project).**
+## D) There are strong opinions on how to write Git commit messages… Find some best practices online and give your own informed recommendations on how to write good commit message (in a team project).**
 
 The most important thing when writing commit messages is clarity. It's important to make sure others will understand clearly what has been done in that commit and that the message is informative. For example, after finishing some function or a code file, we should write down the deed.
 
@@ -331,7 +331,7 @@ It doesn't need to have few characters. But each commit message should summarize
 
 
 
-**E) Docker automatically prepares the required volume space as you start a container. Why is it important that you take an extra step configuring the volumes for a (production) database?**
+## E) Docker automatically prepares the required volume space as you start a container. Why is it important that you take an extra step configuring the volumes for a (production) database?
 
 By default, all files created inside a container are stored on a writable container layer. This means that data doesn't persists when the container no longer exists, we can't easily move the data to somewhere else and writing into a container's writable layer requires a storage driver to manage the filesystem. All of these aspects are very inneffective if we want to store or restore data, for example.
 
