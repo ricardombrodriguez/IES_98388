@@ -143,11 +143,15 @@ It gets immensely more complicated setting up a dev environment and dealing with
 
 It's easier because you can run everything up in just one command..
 
+**Build image** - consistently package everything your application needs to run
+**Ship image** - easily ship these images to runtimes in the cloud or on your local dev machine
+**Run image** - easily and consistently execute your applications
+
 # Docker container
 
 Containers only use host machine kernel, instead of using virtual machines.
-It can start up in seconds instead of minutes, it uses less memory.
-A container is a running instance of an image (snapshot of the system at a particular time)
+It can start up in seconds instead of minutes, it also uses less memory.
+A container is a running instance of an image (snapshot of the system at a particular time).
 
 The OS, software and application code is confined in a container.
 
@@ -155,11 +159,98 @@ Dockerfile -> text file with a list of steps to perform to create that image.
 
 Run dockerfile -> Get an image -> Run the image -> Container
 
-# Docker commands
+# Docker useful commands
 
-docker build -t image_name ->  Build the container image using the docker build command
+```
+Creating a Container
+`docker create [IMAGE_NAME]`
 
-docker run -dp 3000:3000 image_name -> Start the container. What about the the -d and -p flags? We’re running the new container in “detached” mode (in the background) and creating a mapping between the host’s port 3000 to the container’s port 3000. Without the port mapping, we wouldn’t be able to access the application.
+Creating and Running a Container
+`docker run [IMAGE_NAME]`
+
+Starting a Stopped Container
+`docker start [CONTAINER_NAME]`
+
+Stopping a Running Container
+`docker stop [CONTAINER_NAME]`
+
+Restarting a Running Container
+`docker restart [CONTAINER_NAME]`
+
+Pausing a Running Container
+`docker pause [CONTAINER_NAME]`
+
+Resuming a Paused Container
+`docker unpause [CONTAINER_NAME]`
+
+List currently running containers
+`docker ps`
+
+List all containers
+`docker ps -a`
+
+Removing a Container
+`docker rm [CONTAINER_NAME]`
+
+Building an Image from a Dockerfile
+`docker build -f [DOCKERFILE_PATH]`
+
+
+Building an Image from a Container
+`docker commit [CONTAINER_NAME] [IMAGE_NAME]`
+
+Pulling an Image from the Docker Hub
+`docker image pull [IMAGE_NAME]`
+
+Pushing an Image to the Docker Hub
+`docker image push [IMAGE_NAME]`
+
+List Container Images
+`docker image ls` or `docker images`
+
+Deleting an Image from your System
+`docker image remove [IMAGE_NAME]`
+```
+
+**Working with Docker Volumes**
+Attaching Docker Volumes to containers via the docker run, or docker create commands will allow some of the data in your container to persist across image rebuilds. The following docker commands will help you get started with working with docker volumes.
+
+```
+Create a Docker Volume
+`docker volume create [VOLUME_NAME]`
+
+Remove a Docker Volume
+`docker volume rm [VOLUME_NAME]`
+
+Inspect a Docker Volume
+`docker volume inspect [VOLUME_NAME]`
+
+List all Docker Volumes
+`docker volume ls`
+```
+
+**Working with Docker Networks**
+Docker networks determine how containers connect to each other, and the internet. Private networks can be created for various software application stacks to ensure data security.
+
+```
+Creating a Docker Network
+`docker network create [NETWORK_NAME]`
+
+Connecting a Container to a Network
+`docker network connect [NETWORK_NAME] [CONTAINER_NAME]`
+
+Disconnecting a Container from a Network
+`docker network disconnect [NETWORK_NAME] [CONTAINER_NAME]`
+
+Inspecting a Network
+`docker network inspect [NETWORK_NAME]`
+
+Listing all Networks
+`docker network ls`
+
+Removing a Network
+`docker network rm [NETWORK_NAME]`
+```
 
 # How to use another maven project as a dependency
 
@@ -172,3 +263,67 @@ Steps:
 - ```mvn install:install-file -Dfile="/home/ricardo/Documents/IES_98388/lab1/lab1_5/IpmaApiClient/IpmaApiClient/target/IpmaApiClient-1.0-SNAPSHOT.jar" -DgroupId="com.weather.app" -DartifactId="IpmaApiClient" -Dversion="1.0-SNAPSHOT" -Dpackaging=jar``` (insert this command inside the main maven project)
 - ```mvn package``` in the main maven project
 
+
+
+# Review questions
+
+Note: exercise 1.2 is the result of the 1.3 (after pushing 1.3 files to 1.2)
+
+**A) Maven has three lifecycles: clean, site and default. Explain the main phases in the default lifecycle.**
+
+The maven default lifecycle is the main one as it's responsible for project deployment and it consists of many phases as described below:
+
+- validate: check if all information necessary for the build is available
+- compile: compile the source code
+- test-compile: compile the test source code
+- test: run unit tests
+- package: package compiled source code into the distributable format (jar, war, …)
+- integration-test: process and deploy the package if needed to run integration tests
+- install: install the package to a local repository
+- deploy: copy the package to the remote repository
+
+For example, when we are executing ```mvn package``` we are running a specific phase (package phase).
+That being said, we run a specific phase using the command ```mvn <PHASE>```.
+It's important to know that running a specific phase will also execute all previous phases as well.
+
+**B) Maven is a build tool; is it appropriate to run your project to?**
+
+Maven is a very effective build tool to use when developing a project for two main reasons:
+
+- Managing dependencies: The majority of projects use libraries, plugins and many other important stuff. Without maven, we can manually download of those libraries, put them on the classpath, but it's time expensive and it can be very frustating. With Maven, we can just write the libraries we need (and the respective versions) and it does all the hard work for you without needing to waste time.
+
+- Builds: Although we already have dependency management done, we also need to deploy our project that can have different purposes. Well, maven can do this hard work too. It can compile, test, package the application to the format we want (.jar or .war, for example), which is very advantageous.
+
+**C) What would be a likely sequence of Git commands required to contribute with a new feature to a given project? (i.e., get a fresh copy, develop some increment, post back the added functionality)**
+
+After adding new functionalities to the original project (project1) in another folder (project2), we can do the following steps:
+
+```git init``` -> if there's no git repository estabilished
+``` git add *``` -> add all files
+```git commit -m "message"``` -> commit
+```git remote add origin [original project github repository link]``` -> it will start pushing to the original project1 remote repository after a *push* command
+```git push``` -> push to the original repository
+```git log --reverse --oneline``` -> (optional command) this will present the repository history
+
+**D) There are strong opinions on how to write Git commit messages… Find some best practices online and give your own informed recommendations on how to write good commit message (in a team project).**
+
+The most important thing when writing commit messages is clarity. It's important to make sure others will understand clearly what has been done in that commit and that the message is informative. For example, after finishing some function or a code file, we should write down the deed.
+
+Examples:
+```git commit -m "lab1_5 done"```
+```git commit -m "xyz function completed"```
+```git commit -m "abc bug fixed"```
+
+It doesn't need to have few characters. But each commit message should summarize all the work that has been done in the commit span.
+
+**E) Docker automatically prepares the required volume space as you start a container. Why is it important that you take an extra step configuring the volumes for a (production) database?**
+
+By default, all files created inside a container are stored on a writable container layer. This means that data doesn't persists when the container no longer exists, we can't easily move the data to somewhere else and writing into a container's writable layer requires a storage driver to manage the filesystem. All of these aspects are very inneffective if we want to store or restore data, for example.
+
+That being said, docker has two options for containers to store files in the host machine: *volumes* and *bind mounts*.
+
+Unlike bind mounts, which can be stored anywhere on the host system, volumes are stored in a part of the host file system which is managed by Docker and non-Docker processes can't modify this part of the file system. 
+
+Volumes are the best way to persist data in Docker, as Docker volumes are file systems mounted on containers to preserve data generated by the running container. They're stored on the host, independently from the container lifecycle, although container's data can also be stored on a remote host/cloud. This allows users to backup data and share file systems between containers easily.
+
+When no running container is using a volume, the volume is still available to Docker and it's not removed automatically, unless we manually remove unused volumes using the ```docker volume prune``` command.
