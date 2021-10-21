@@ -25,7 +25,10 @@ public class WeatherStarter {
 
     public static void  main(String[] args ) {
 
-        final int CITY_ID = Integer.parseInt(args[0]);
+        int CITY_ID = 1010500; //cidade de aveiro (default) 
+        if (args.length == 1) {
+            CITY_ID = Integer.parseInt(args[0]);
+        }
 
         /*
         get a retrofit instance, loaded with the GSon lib to convert JSON into objects

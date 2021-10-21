@@ -91,3 +91,96 @@
 2021-10-19 15:42:41 INFO  Temperatura máxima: 21.7ºC
 2021-10-19 15:42:41 INFO  Direção vento: E
 2021-10-19 15:42:41 INFO  Probabilidade de precipitação: 0.0%
+2021-10-21 22:57:16 INFO   === Meteorologia para os próximos cinco dias === 
+2021-10-21 22:57:16 INFO   ================================================ 
+2021-10-21 22:57:16 INFO                          Hoje                
+2021-10-21 22:57:16 INFO  Temperatura mínima: 14.3ºC
+2021-10-21 22:57:16 INFO  Temperatura máxima: 18.6ºC
+2021-10-21 22:57:16 INFO  Direção vento: N
+2021-10-21 22:57:16 INFO  Probabilidade de precipitação: 1.0%
+2021-10-21 22:57:16 INFO   ================================================ 
+2021-10-21 22:57:16 INFO                          Amanhã                
+2021-10-21 22:57:16 INFO  Temperatura mínima: 11.1ºC
+2021-10-21 22:57:16 INFO  Temperatura máxima: 20.6ºC
+2021-10-21 22:57:16 INFO  Direção vento: N
+2021-10-21 22:57:16 INFO  Probabilidade de precipitação: 0.0%
+2021-10-21 22:57:16 INFO   ================================================ 
+2021-10-21 22:57:16 INFO                          3º dia                
+2021-10-21 22:57:16 INFO  Temperatura mínima: 10.0ºC
+2021-10-21 22:57:16 INFO  Temperatura máxima: 20.8ºC
+2021-10-21 22:57:16 INFO  Direção vento: NW
+2021-10-21 22:57:16 INFO  Probabilidade de precipitação: 0.0%
+2021-10-21 22:57:16 INFO   ================================================ 
+2021-10-21 22:57:16 INFO                          4º dia                
+2021-10-21 22:57:16 INFO  Temperatura mínima: 8.5ºC
+2021-10-21 22:57:16 INFO  Temperatura máxima: 19.6ºC
+2021-10-21 22:57:16 INFO  Direção vento: NW
+2021-10-21 22:57:16 INFO  Probabilidade de precipitação: 25.0%
+2021-10-21 22:57:16 INFO   ================================================ 
+2021-10-21 22:57:16 INFO                          5º dia                
+2021-10-21 22:57:16 INFO  Temperatura mínima: 12.4ºC
+2021-10-21 22:57:16 INFO  Temperatura máxima: 19.1ºC
+2021-10-21 22:57:16 INFO  Direção vento: NW
+2021-10-21 22:57:16 INFO  Probabilidade de precipitação: 6.0%
+2021-10-21 22:59:20 INFO   === Meteorologia para os próximos cinco dias === 
+2021-10-21 22:59:20 INFO   ================================================ 
+2021-10-21 22:59:20 INFO                          Hoje                
+2021-10-21 22:59:20 INFO  Temperatura mínima: 14.3ºC
+2021-10-21 22:59:20 INFO  Temperatura máxima: 18.6ºC
+2021-10-21 22:59:20 INFO  Direção vento: N
+2021-10-21 22:59:20 INFO  Probabilidade de precipitação: 1.0%
+2021-10-21 22:59:20 INFO   ================================================ 
+2021-10-21 22:59:20 INFO                          Amanhã                
+2021-10-21 22:59:20 INFO  Temperatura mínima: 11.1ºC
+2021-10-21 22:59:20 INFO  Temperatura máxima: 20.6ºC
+2021-10-21 22:59:20 INFO  Direção vento: N
+2021-10-21 22:59:20 INFO  Probabilidade de precipitação: 0.0%
+2021-10-21 22:59:20 INFO   ================================================ 
+2021-10-21 22:59:20 INFO                          3º dia                
+2021-10-21 22:59:20 INFO  Temperatura mínima: 10.0ºC
+2021-10-21 22:59:20 INFO  Temperatura máxima: 20.8ºC
+2021-10-21 22:59:20 INFO  Direção vento: NW
+2021-10-21 22:59:20 INFO  Probabilidade de precipitação: 0.0%
+2021-10-21 22:59:20 INFO   ================================================ 
+2021-10-21 22:59:20 INFO                          4º dia                
+2021-10-21 22:59:20 INFO  Temperatura mínima: 8.5ºC
+2021-10-21 22:59:20 INFO  Temperatura máxima: 19.6ºC
+2021-10-21 22:59:20 INFO  Direção vento: NW
+2021-10-21 22:59:20 INFO  Probabilidade de precipitação: 25.0%
+2021-10-21 22:59:20 INFO   ================================================ 
+2021-10-21 22:59:20 INFO                          5º dia                
+2021-10-21 22:59:20 INFO  Temperatura mínima: 12.4ºC
+2021-10-21 22:59:20 INFO  Temperatura máxima: 19.1ºC
+2021-10-21 22:59:20 INFO  Direção vento: NW
+2021-10-21 22:59:20 INFO  Probabilidade de precipitação: 6.0%
+2021-10-21 22:59:40 INFO   === Meteorologia para os próximos cinco dias === 
+2021-10-21 22:59:40 INFO   ================================================ 
+2021-10-21 22:59:40 INFO                          Hoje                
+2021-10-21 22:59:40 INFO  Temperatura mínima: 14.3ºC
+2021-10-21 22:59:40 INFO  Temperatura máxima: 18.6ºC
+2021-10-21 22:59:40 INFO  Direção vento: N
+2021-10-21 22:59:40 INFO  Probabilidade de precipitação: 1.0%
+2021-10-21 22:59:40 INFO   ================================================ 
+2021-10-21 22:59:40 INFO                          Amanhã                
+2021-10-21 22:59:40 INFO  Temperatura mínima: 11.1ºC
+2021-10-21 22:59:40 INFO  Temperatura máxima: 20.6ºC
+2021-10-21 22:59:40 INFO  Direção vento: N
+2021-10-21 22:59:40 INFO  Probabilidade de precipitação: 0.0%
+2021-10-21 22:59:40 INFO   ================================================ 
+2021-10-21 22:59:40 INFO                          3º dia                
+2021-10-21 22:59:40 INFO  Temperatura mínima: 10.0ºC
+2021-10-21 22:59:40 INFO  Temperatura máxima: 20.8ºC
+2021-10-21 22:59:40 INFO  Direção vento: NW
+2021-10-21 22:59:40 INFO  Probabilidade de precipitação: 0.0%
+2021-10-21 22:59:40 INFO   ================================================ 
+2021-10-21 22:59:40 INFO                          4º dia                
+2021-10-21 22:59:40 INFO  Temperatura mínima: 8.5ºC
+2021-10-21 22:59:40 INFO  Temperatura máxima: 19.6ºC
+2021-10-21 22:59:40 INFO  Direção vento: NW
+2021-10-21 22:59:40 INFO  Probabilidade de precipitação: 25.0%
+2021-10-21 22:59:40 INFO   ================================================ 
+2021-10-21 22:59:40 INFO                          5º dia                
+2021-10-21 22:59:40 INFO  Temperatura mínima: 12.4ºC
+2021-10-21 22:59:40 INFO  Temperatura máxima: 19.1ºC
+2021-10-21 22:59:40 INFO  Direção vento: NW
+2021-10-21 22:59:40 INFO  Probabilidade de precipitação: 6.0%

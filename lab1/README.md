@@ -4,7 +4,8 @@ Simple maven introduction: https://www.devdungeon.com/content/maven-basics-java-
 
 # What is Maven?
 
-Maven is a build tool that automates the compiling, dependency management, packaging, and even deployment of Java applications. Some Maven's alternatives are ANT and GRADLE.
+The regular “build” of a (large) project takes several steps, such as obtaining dependencies (required external components/libraries), compiling source code, packaging artifacts, updating documentation, installing on the server, etc..  In medium to large projects, these tasks are coordinated by a build tool. Maven is the most popular build tool used among professional projects.
+That being said, Maven **automates the compiling, dependency management, packaging, and even deployment of Java applications**. Some Maven's alternatives are ANT and GRADLE.
 
 # Why use Maven instead of the typical **javac**?
 
@@ -21,20 +22,22 @@ Maven advantages:
 
 # Creating a Maven project:
 
-App name: *MyWeatherRadar*
+App name (for exercise 1.2): *MyWeatherRadar*
 
-Maven has a concept called *archetypes*, which are essentially prebuilt project templates that include folder structure and files needed to get started for a specific type of project. There are tons of archetypes out there that come with templates for building things like command line apps, empty projects, gui apps, and web apps. There is at least one archetype worth memorizing and that is the maven-archetype-quickstart. This generates the simplest possible project with one source file ready for us to edit.
+Maven has a concept called *archetypes*, which are essentially prebuilt project templates that include folder structure and files needed to get started for a specific type of project. There are tons of archetypes out there that come with templates for building things like command line apps, empty projects, gui apps, and web apps. There is at least one archetype worth memorizing and that is the maven-archetype-quickstart. This generates the simplest possible project with one source file ready for us to edit, as we are going to use in this project.
 
 ```
 mvn archetype:generate -DgroupId=com.MyWeatherRadar.app -DartifactId=MyWeatherRadar -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false 
 ```
 The example just above also includes the optional -DinteractiveMode=false flag, which disables the prompt to press Y and review the information. Leave interactiveMode set to true if you do want to review the information before it creates the project.
 
-groupId: Namespace of the project / website (ex: GitHub account)
+**groupId**: It uniquely identifies your project across all projects. A group ID should follow Java's package name rules!! This means it starts with a reversed domain name you control. For example, *org.apache.maven*, *org.apache.commons*. This rule is not mandatory, as we can use single word groupId's, but it's not recommended and it will be difficult to get a new single word group ID approved for inclusion in the Maven Central repository.
 
-artifactId: Name of the package within the domain (groupId)
+**artifactId**: It's the name of the jar without version. If you created it, then you can choose whatever name you want with lowercase letters and no strange symbols. If it's a third party jar, you have to take the name of the jar as it's distributed.
 
-version: Version of the project
+**version**:  If you distribute it, then you can choose any typical version with numbers and dots (1.0, 1.1, 1.0.1, ...). Don't use dates as they are usually associated with SNAPSHOT (nightly) builds. If it's a third party artifact, you have to use their version number whatever it is, and as strange as it can look.
+
+Note: “-D” switch is used to define/pass a property to Maven in CLI. 
 
 # API request:
 
@@ -44,13 +47,15 @@ Start by analyzing the struct of the API requests and the replies (e.g.: check t
 curl http://api.ipma.pt/open-data/forecast/meteorology/cities/daily/1010500.json | json_pp 
 ```
 
+This command will print out the JSON info available at that URL.
+
 # What is POM?
 
 A Project Object Model or POM is the fundamental unit of work in Maven. It is an XML file that contains information about the project and configuration details used by Maven to build the project. It contains default values for most projects. Examples for this is the build directory, which is target; the source directory, which is src/main/java; the test source directory, which is src/test/java; and so on. When executing a task or goal, Maven looks for the POM in the current directory. It reads the POM, gets the needed configuration information, then executes the goal.
 
 Some of the configuration that can be specified in the POM are the project dependencies, the plugins or goals that can be executed, the build profiles, and so on. Other information such as the project version, description, developers, mailing lists and such can also be specified.
 
-For example, on the properties code block we can change the Java version to "11".
+For example, on the properties code block we can change the Java version to "11" or we can add some dependencies needed for the project (ex: Retrofit).
 
 # Resources
 
@@ -92,6 +97,8 @@ Compile and run the project, either from the IDE or the CLI.
 mvn package #get dependencies, compiles the project and creates the jar 
 mvn exec:java -Dexec.mainClass="weather.WeatherStarter" -D exec.cleanupDaemonThreads=false #adapt to match your own package and class name  
 ```
+
+This *mvn* commands are performed in the Maven project root (in the folder where *pom.xml* resides)
 
 # Maven arguments
 
