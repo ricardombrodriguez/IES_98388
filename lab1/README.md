@@ -267,7 +267,9 @@ Steps:
 
 # Review questions
 
-Note: exercise 1.2 is the result of the 1.3 (after pushing 1.3 files to 1.2)
+Notes: 
+- exercise 1.2 is the result of the 1.3 (added some functionalities and added log4j2)
+- the log files are inside the logs/ folder, which resides inside the maven project root (with pom.xml and src/ folder)
 
 
 
