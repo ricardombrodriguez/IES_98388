@@ -14,6 +14,8 @@ What is Apache Tomcat??
 
 Essentially it’s an open-source Java servlet and Java Server Page container that lets developers implement an array of enterprise Java applications. Tomcat also runs a HTTP web server environment in which Java code can run.
 
+How to run Apache Tomcat: Execute the script inside the bin/ folder - ./(apachefolder)/bin/startup.sh
+
 There are 3 methods to see if the Tomcat server is running:
 
 1. Curl tool: ```curl -I 127.0.0.1:8080``` 
@@ -57,6 +59,31 @@ In the *cookie* example, we can set a cookie by getting the *cookiename* and *co
 
 When we type the "submit" button, all the form data will be sent using the POST HTTP method.
 
+# HTTP GET and POST methods
+
+**GET method:**
+
+GET is used to request data from a specified resource.
+The query string (name/value pairs) is sent in the URL of a GET request.
+
+- GET requests can be cached
+- GET requests remain in the browser history
+- GET requests can be bookmarked
+- GET requests should never be used when dealing with sensitive data
+- GET requests have length restrictions
+- GET requests are only used to request data (not modify)
+
+**POST method:**
+
+POST is used to send data to a server to create/update a resource.
+The data sent to the server with POST is stored in the request body of the HTTP request.
+
+- POST requests are never cached
+- POST requests do not remain in the browser history
+- POST requests cannot be bookmarked
+- POST requests have no restrictions on data length
+
+
 # Create web application and deploying it into Tomcat
 
 We can start by creating a maven-based web application project (with the correct maven archetype for web-based projects).
@@ -86,4 +113,144 @@ If address is already in use:
 If you know what port the process is running you can type: ```<lsof -i:<port>.```
 For instance, lsof -i:8080, to list the process (pid) running on port 8080.
 Then kill the process with kill ```<pid>```
+
+In the 2.1 h) subexercise, the *user* and *color* parameters must be passed as a query in the URL as described below:
+
+```
+http://localhost:8080/tomcat_webapp-1.1/welcome?user=ricardo&color=blue
+```
+
+Note that we use the '&' character to separate different request parameters.
+We can use the NullPointerException to throw an exception if some parameter is not fulfilled.
+
+# Server-side programming with embedded servers
+
+Now, our goal is to develop the Servlet example presented on the last exercise but with an embedded server approach. For that, we will be using the Embedded **Jetty** Server.
+
+Jetty can be used in standalone mode, but the main purpose behind building jetty was so that it could be used inside an application instead of deploying an application on jetty server.
+
+Generally you write a web application and build that in a WAR file and deploy WAR file on jetty server. In Embedded Jetty, you write a web application and instantiate jetty server in the same code base, which is very effective compared to the previous methodology.
+
+To run a simple web application on a embedded server, we first need to instantiate some jetty dependencies in *pom.xml*: *jetty-server* and *jetty-servlet*.
+
+We can create a new server with the jetty Server class, passing the port of the network as a parameter of the constructor.
+The ServletHandler class is a Servlet HttpHandler. This handler maps requests to servlets that implement the javax.servlet.http.HttpServlet API.
+That being said, we want to set the created handler as the server handler, and we can do it by using the setHandler() method.
+The addServletWithMapping() is used to add a servlet and has two parameters: the servlet class and the url-pattern.
+After that, we can start the server and the defined Servlet handler will handle the http requests.
+
+In jetty, we can get the http parameters with the request.getParameter("parameter"), as we did before..
+However, to present HTML code, we use the response.getWriter().println("code") method.
+
+Now, instead of having to undeploy and deploy the project after making alterations, we just need to build the project with Maven, run the Java file and access the http://localhost:{port}/{url-pattern}.
+
+# Introduction to web apps with a full-featured framework (Spring Boot)
+
+**What is Spring Boot?**
+
+Spring Boot is a rapid application development platform built on top of the popular Spring Framework. By assuming opinionated choices by default (e.g.: assumes common configuration options without the need to specify everything), Spring Boot is a **convention-over-configuration** addition to the Spring platform, useful to get started with minimum effort and create stand-alone, production-grade applications. TLDR: Spring Boot reduces the time-expensive configuration, as it uses a set of default configurations for Spring (we just need to adjust some things).
+
+**And what about the Spring framework?**
+
+Things the Spring framework can do:
+- Microservices -> Quickly deliver production‑grade features with independently evolvable microservices.
+- Reactive - >Spring's asynchronous, nonblocking architecture means you can get more from your computing resources.
+- Cloud -> Your code, any cloud—we’ve got you covered. Connect and scale your services, whatever your platform.
+- Web apps -> Frameworks for fast, secure, and responsive web applications connected to any data store.
+- Serverless -> The ultimate flexibility. Scale up on demand and scale to zero when there’s no demand.
+- Event Driven -> Integrate with your enterprise. React to business events. Act on your streaming data in realtime.
+- Batch -> Automated tasks. Offline processing of data at a time to suit you.
+
+Basically, Spring framework has libraries for database connection, authentication management and restful api creation.
+
+**Spring Initializr**
+
+This web tools allows us to create Maven-based Spring Boot project for a web application. We can manually add project dependencies (ex: Spring web dependency) as it simplifies the pom.xml setup.
+
+The generated maven project created by Spring Initializr also contains a Maven wrapper script (.mnvw file). It's a good option for projects that need a specific version of Maven, for users who don't want to install Maven as we can just use the project-specific wrapper script.
+
+**Maven Wrapper Setup:**
+
+1. Run this command in the main folder of the project (optional maven version specification):
+```
+mvn -N io.takari:maven:wrapper (-Dmaven=<version>)
+```
+Note that we're using the Takari Maven plugin available at: https://github.com/takari/takari-maven-plugin
+
+2. After executing this command, more files and directories will be created in the project:
+- mvnw: it's an executable Unix shell script used in place of a fully installed Maven
+- mvnw.cmd: it's the Batch version of the above script
+- mvn: the hidden folder that holds the Maven Wrapper Java library and its properties file
+
+**Build and run the program**
+
+Two options to run the Spring Boot Maven-based project:
+```
+ mvninstall -DskipTests && java -jar target\webapp1-0.0.1-SNAPSHOT.jar
+```
+or
+```
+./mvnwspring-boot:run
+```
+
+If we access http://localhost:8080/, we shall get the following error:
+
+>Whitelabel Error Page
+>This application has no explicit mapping for /error, so you are seeing this as a fallback.
+
+>Sat Oct 30 18:54:05 WEST 2021
+>There was an unexpected error (type=Not Found, status=404).
+
+By default, Spring boot applications start with embedded tomcat server start at **default port 8080**. We can change default embedded server port to any other port, using any one of below technique.
+
+- Changing server port in *application.properties*: server.port={port}
+- Changing server port in *application.yml*: server: port: {port}
+
+The *application.properties* file can be found inside the src/main/resources folder.
+
+These are the simplest steps to change the server port, although we can change it programatically or from the command line.
+
+# Serving Web content with Spring MVC
+
+Goal: to develop a web application that will accept HTTP GET requests (like we did before two times) and display a greeting with an optional *name* passed as a parameter in the query string (in the URL).
+
+After setting up the project, we can proceed with the web controller implementation.
+
+In Spring framework, HTTP requests are handled by a controller, that can be easily identified by the *@Controller* annotation.
+
+Note: The controller class needs its own file.
+
+Controller code breakdown:
+
+The @GetMapping annotation ensures that HTTP GET requests to /welcome are mapped to the welcome() method.
+@RequestParam binds the value of the query string parameter name into the name parameter of the welcome() method. This query string parameter is required (although it can be disabled with the 'false' value). If it is absent in the request (if required = false), the defaultValue will be set as the default value. The value of the name parameter is added to a Model object, ultimately making it accessible to the view template.
+
+Note: the string returned by the welcome() method must be equal to the name of the .html file that resides inside the templates/ folder, otherwise it won't work.
+
+The implementation of the method body relies on a view technology (in this case, **Thymeleaf**) to perform server-side rendering of the HTML. Thymeleaf parses the welcome.html template and evaluates the th:text expression to render the value of the ${name} parameter that was set in the controller.
+
+**Spring Boot Devtools**
+
+A common methodology of web development is making changes, restarting the application and then refresh the browser to view alterations. However, this process is time-expensive and we can speed it up by using a handy module Spring Boot offers known as **spring-boot-devtools**. It enables hot swapping, switches template engines to disable caching, enables LiveReload to automatically refresh the browser and other features...
+
+**Running the application**
+
+By default, Spring Initializr will create an application class and we don't need no further alterations on this file.
+
+@SpringBootApplication is a convenience annotation that adds all of the following:
+
+- @Configuration: Tags the class as a source of bean definitions for the application context.
+- @EnableAutoConfiguration: Tells Spring Boot to start adding beans based on classpath settings, other beans, and various property settings.
+- @ComponentScan: Tells Spring to look for other components, configurations, and services in the com/example package, letting it find the controllers.
+
+The main() method of this file does not refer to any xml file, as everything is dealt with pure Java.
+
+**Building an executable JAR**
+
+In Maven, you can run the application by using ```./mvnw spring-boot:run```. 
+
+Alternatively, you can build the JAR file with ./mvnw clean package and then run the JAR file with ```java -jar target/gs-serving-web-content-0.1.0.jar```
+
+Link example to run the web application: http://localhost:9000/welcome?name=Ricardo%20Rodriguez
+
 
