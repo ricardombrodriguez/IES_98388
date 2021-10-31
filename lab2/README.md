@@ -253,4 +253,82 @@ Alternatively, you can build the JAR file with ./mvnw clean package and then run
 
 Link example to run the web application: http://localhost:9000/welcome?name=Ricardo%20Rodriguez
 
+**Creating a REST endpoint**
+
+Goal of the exercise: Create a REST endpoint that listens to the HTTP request and answers with a JSON result (greeting message).
+
+As we already know, **JSON** or JavaScript Object Notation is a lightweight format for storing/transporting data, it's easy to understand as data is stored in pairs (key-value pairs) and different objects (hold by curly braces) are separated by commas.
+
+The service will handle GET requests for /greeting, optionally with a name parameter in the query string. The GET request should return a 200 OK response with JSON in the body that represents a greeting. It should resemble the following output:
+
+>{
+>    "id": 1,
+>    "content": "Hello, <user>!"
+>}
+
+The *id* field is a unique identifier for the greeting, and *content* is the textual representation of the greeting.
+
+First, we create a Java resource representation class named *Greeting.java*, it will be representing the JSON result as a class. To do that, we need the attributes, get() methods and the constructor for the id and the name.
+
+After the representation class creation, we also need to create a resource controller. This is because in Spring’s approach to building RESTful web services, HTTP requests are handled by a controller (identified by the *@RestController* annotation).
+
+This controller should handle HTTP GET requests for the URL path provided in the *@GetMapping* annotation, returning a new object of the *Greeting.java* class (resource representation class). Note that the getGreeting() method will be returning a new instance of the *Greeting* class, as we wanted. The AtomicLong *counter* instance is a *long* value that may be update atomically with the incrementAndGet() method, returning a new id for the next greeting. The *%s* in the *template* variable will be replaced by the *name* variable (thanks to the String.format() method).
+
+@RequestParam binds the value of the query string parameter name into the name parameter of the greeting() method. If the name parameter is absent in the request, the defaultValue of World ("dear friend") is used.
+
+A key **difference between a traditional MVC controller and the RESTful web service controller shown earlier** is the way that the HTTP response body is created. Rather than relying on a view technology to perform server-side rendering of the greeting data to HTML, **this RESTful web service controller populates and returns a Greeting object**. The **object data will be written directly to the HTTP response as JSON**.
+
+The Greeting object must be converted to JSON. Thanks to Spring’s HTTP message converter support (MappingJackson2HttpMessageConverter), you need not do this conversion manually. 
+
+Note: **we need to add 3 jackson dependencies** (they must be the same version otherwise it won't work):
+- jackson-databind 
+- jackson-core
+- jackson-annotations
+Version (most recent one): 2.13.0
+
+Link: http://localhost:9000/greeting?name=Ricardo%20Rodriguez
+
+However, we can also access the REST endpoint using the *curl* utility.
+
+**curl** is a command-line tool for transferring data, and it supports about 22 protocols, including HTTP. This combination makes it a very good ad-hoc tool for testing our REST services. It can support a vast variety of command-line options.
+
+**Verbose:**
+
+When we're testing, it’s a good idea to set the verbose mode on: ```curl -v http://localhost:9000/greeting?name=Ricardo%20Rodriguez```
+As a result, the commands provide helpful information such as the resolved IP address, the port we're trying to connect to, and the headers.
+
+Result:
+```
+curl -v http://localhost:9000/greeting?name=Ricardo%20Rodriguez
+*   Trying 127.0.0.1:9000...
+* TCP_NODELAY set
+* Connected to localhost (127.0.0.1) port 9000 (#0)
+> GET /greeting?name=Ricardo%20Rodriguez HTTP/1.1
+> Host: localhost:9000
+> User-Agent: curl/7.68.0
+> Accept: */*
+> 
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 
+< Content-Type: application/json
+< Transfer-Encoding: chunked
+< Date: Sun, 31 Oct 2021 15:32:16 GMT
+< 
+* Connection #0 to host localhost left intact
+{"id":26,"name":"Hello, Ricardo Rodriguez!"}
+```
+
+**Output:**
+
+By default, curl outputs the response body to standard output. Additionally, we can provide the output option to save to a file: ```curl -o output_file.json http://localhost:9000/greeting?name=Ricardo%20Rodriguez```
+This is especially helpful when the response size is large.
+
+Result:
+```
+$ cat output_file.json 
+{"id":27,"name":"Hello, Ricardo Rodriguez!"}
+```
+
+
+
 

@@ -14,4 +14,12 @@ public class WelcomeController {
 		return "index";
 	}
 
+	/*
+	Se 'name' fosse opcional e tivesse o valor default 'fellow visitor'
+	@GetMapping("/welcome")
+	public String welcome(@RequestParam(name="name", required = false, defaultValue = "fellow visitor") String name, Model model) {
+		model.addAttribute("name", name);
+		return "index";
+	}
+	*/
 }
