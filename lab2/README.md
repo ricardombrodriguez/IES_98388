@@ -210,6 +210,8 @@ The *application.properties* file can be found inside the src/main/resources fol
 
 These are the simplest steps to change the server port, although we can change it programatically or from the command line.
 
+
+
 # Serving Web content with Spring MVC
 
 Goal: to develop a web application that will accept HTTP GET requests (like we did before two times) and display a greeting with an optional *name* passed as a parameter in the query string (in the URL).
@@ -328,6 +330,124 @@ Result:
 $ cat output_file.json 
 {"id":27,"name":"Hello, Ricardo Rodriguez!"}
 ```
+
+
+
+# Wrapping-up & integrating concepts
+
+We now want to develop a web server (REST API) that offers random quotes from movies/shows from an existing API. 
+
+Because this is a practical class to improve our REST API skills, we can simply add the quotes/movie information in a static way and we don't need to add every quote/show that exists.
+
+
+
+**Links where I got the quotes & movies/show info:**
+
+- [Get tv shows info](https://movie-quote-api.herokuapp.com/v1/shows/)
+
+- [Get random quote](https://movie-quote-api.herokuapp.com/v1/quote/)
+
+- [Get random quote from movie/show](https://movie-quote-api.herokuapp.com/v1/shows/show-slug) (needs show-slug argument)
+
+
+
+**Web server link**: http://localhost:8080/ (already has labels that redirect to the different functionalities)
+
+
+
+**Functionalities of the web application:**
+
+- **api/quote** -> Returns a random quote from a random show/film.
+- **api/shows** -> List of all available shows (for which some quote exists).
+- **api/quotes?show=<show_id>** -> Returns a random quote for the specified show/film (show_id is an identifier in the 1-5 range).
+
+All responses are presented as JSON data.
+
+For this project, we need a REST controller for each of the URL patterns / functionalities. *ShowsController* that returns all existing shows, *QuoteController* that shows a random quote from a movie/show and finally the *QuoteShowController* that returns a random quote from the show id we selected (as a GET parameter).
+
+Besides that, I also created the *Show* and *Quote* classes that represent the entities.
+
+
+
+# Review questions
+
+
+
+## A. What are the responsibilities/services of a “servlet container”?
+
+
+
+A web server uses HTTP protocol to send (http request) and receive (http response) data. Generally speaking, a user types the URL of the website and he will be given a webpage.
+
+However, sometimes the user may need to send data to the web server to get a dynamic web page, based on his input. The solution to avoid these static responses from the web server is to use Servlet containers. With Servlet containers, the web server can handle requests in Java to render a response based on that received input and present it to the user.
+
+A **Servlet** is a class that handles requests, processes them and replies back with a response. These are under the control of another Java application called a **Servlet Container**. When an application running in a web server receives a request*,* the Server hands the request to the Servlet Container – which in turn passes it to the target Servlet.
+
+#### A Servlet container can provide a series of services:
+
+- Load, initialize and execute servlets.
+
+- Communication between the servlet and the web server 
+
+- Lifecycle management : It manages the set of methods which define the lifecycle of a servlet. Methods: 
+
+  - ***init()*** - If an instance of the servlet does not exist, the web container loads the servlet class, creates an instance of the servlet class and initializes it by calling the init method; 
+
+  - ***service()*** - This method is only called after the servlet's *init()* method has completed successfully*.* The container calls this method to handle client requests, it interprets the HTTP request type (GET,POST,PUT,DELETE,etc..) and calls *doGet*, *doPost*, *doPut*, *doDelete* and other methods as appropriate; 
+  - ***destroy()*** - Called by the Servlet Container to take the Servlet out of service.
+
+- Multithreading support : It automatically creates a new thread for every servlet request received. When the Servlet service() method completes, the thread dies. Note: one servlet container can hold multiple active servlets.
+
+- Declarative security : It manages the security inside the XML deployment descriptor file.
+
+- JSP support : The container is responsible for converting JSPs to servlets and for maintaining them.
+
+
+
+## B. Explain, in brief, the “dynamics” of Model-View-Controller approach used in Spring Boot to serve web. (You may exemplify with the context of the previous exercises.)
+
+
+
+Sprint Boot is a Spring (framework) project that simplifies the configuration and building of a application. You just need to specify which modules you want to use in your project and he will recognize and configure it for you to use.
+
+#### Spring Boot main functionalities:
+
+- Create stand-alone applications
+- Provide starting dependencies to simplify building configuration
+- No requirement for *pom.xml* configuration nor code generation (as it does all for us)
+- Embed Tomcat, Jetty directly (without the need to deploy WAR files)
+
+**Spring MVC** is a model view controller-based web framework under the Spring framework. It helps us to develop strong and flexible web applications.
+
+#### Spring MVC functionalities:
+
+- Receive HTTP requests
+- Dispatch processing of data to other components
+- Prepare the response needed to the user
+
+#### Spring MVC steps:
+
+1. User sends a HTTP request to a server that runs on Spring MVC and the framework controller (Spring MVC) receives it.
+2. The framework controller searches which class is responsible to handle the HTTP request (this can be done by looking for the class with the correct @GetMapping() annotation) and delivers all data sent by the browser. This class is the controller (it has the @Controller annotation). Example: *WelcomeController* is the controller that handles all HTTP requests that maps to the "/welcome" URL pattern.
+3. The controller sends data to the model (ex: through the *model.addAttribute()* method). This last one executes all the logic behind the business core (operations, validations, database access, class instantiations, etc..) and returns the results to the controller.
+4.  The controller returns the name of the view alongside the data it needs to render the web page. (Ex: *WelcomeController* returns "index" as it's the name of the view).
+5. The Spring MVC framework finds the view that processes data, transforming the result in HTML, which in turn is sent back to the user's browser.
+
+
+
+## C. Inspect the POM.xml for the previous Spring Boot projects. What is the role of the “starters” dependencies?
+
+
+
+In the previous Spring Boot projects, we used the following starter dependencies:
+
+- **Spring Web** > The spring web dependency contains common web specific utilities for both Servlet and Portlet environments. It allows us to build web (RESTful included) applications using the Spring MVC framework (previously mentioned).
+- **Thymeleaf** > Is a modern server-side Java template engine for both web and stand-alone environments. It allows HTML to be correctly displayed in browsers and as static prototypes. In the previous project, the HTML file uses Thymeleaf as *${name}* will be replaced by the value of the "name" attribute.
+- **Spring Boot DevTools** > It provides fast application restarts, LiveReload and configurations for a better development experience. 
+- **Jackson Databind** > It automatically marshal instances of a class into JSON. Jackson is included by default by the web starter. Example: *GreetingController* returns a new instance of the *Greeting* class and the application uses Jackson to transform the instance of the *Greeting* class into JSON, presenting it on the web server.
+
+
+
 
 
 
