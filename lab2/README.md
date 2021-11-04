@@ -439,6 +439,8 @@ Sprint Boot is a Spring (framework) project that simplifies the configuration an
 
 
 
+The *starter* dependencies allows us to automatically add the .jar files on to the classpath, turning web development much more simple and less time-expensive.
+
 In the previous Spring Boot projects, we used the following starter dependencies:
 
 - **Spring Web** > The spring web dependency contains common web specific utilities for both Servlet and Portlet environments. It allows us to build web (RESTful included) applications using the Spring MVC framework (previously mentioned).
@@ -448,7 +450,70 @@ In the previous Spring Boot projects, we used the following starter dependencies
 
 
 
+## D. Which annotations are transitively included in the @SpringBootApplication?
 
 
 
+The @SpringBootApplication annotation automatically includes three features:
+
+- @EnableAutoConfiguration: enables Spring Boot’s auto-configuration mechanism
+- @ComponentScan: enables @Component scan on the package where the application is located
+- @Configuration: allows to register extra beans in the context or import additional configuration classes
+
+
+
+## E. Search online for the topic “Best practices for REST API design”. From what you could learn, select your “top 5”practices, and briefly explain them in you own words.
+
+
+
+**API version control**: 
+
+If we’re making changes on a API, we should have different versions of it, as bad changes may break clients and our application functionality may be compromised. The versioning can be done according to like most apps do nowadays.
+
+This way, we can gradually phase out old endpoints instead of forcing everyone to move to the new API at the same time. 
+
+Versioning is usually done with `/v1/`, `/v2/`, etc. added at the start of the API path.
+
+This way, the /v1/ endpoint can stay active for people who don’t want to change, while the /v2/, with its new features, can serve those who are ready to upgrade. This is especially important if our API is public. We should version them so that we won’t break third party apps that use our APIs and so that we can satisfy the different spectrum of the target audience.
+
+
+
+**Filtering and pagination:**
+
+The databases behind a REST API can get very large. Therefore, we need ways to filter data because it shouldn’t be returned all at once and will bring down our systems. We also need ways to paginate data so that we only return a few results at a time. We don’t want to tie up resources for too long by trying to get all the requested data at once (a lot of data can accumulate in the database).
+
+
+
+**JSON handling:**
+
+REST APIs should accept JSON for request payload and also send responses to JSON. Almost every networked technology can use it and server-side technologies have libraries that can decode JSON without doing much work (example: Jackson).
+
+Form data is good for sending data, especially if we want to send files. But for text and numbers, we don’t need form data to transfer those since—with most frameworks—we can transfer JSON by just getting the data from it directly on the client side. It’s by far the most straightforward to do so.
+
+
+
+**Use HTTP status codes to handle situations:**
+
+Pretty much all types of error messages can be categorized in the existing HTTP status codes. These are not just useful to humans, but especially to machines. Status codes can be parsed far more quickly than a body text and they are also standardized, so the client library is likely to know what the status code represents. Examples of some HTTP status categories:
+
+- 1xx: informational - just letting you know
+- 2xx: successful - everything’s OK
+- 3xx: redirection - your content is somewhere else
+- 4xx: client error - you’re doing something wrong
+- 5xx: server error - we’re doing something wrong
+
+
+
+**Use nouns instead of verbs in endpoint paths**
+
+We should use the nouns, which represent the entity that the endpoint that we’re retrieving or manipulating as the pathname, instead of verbs in endpoint paths.
+
+This is because our HTTP request method already has the verb. Having verbs in our API endpoint paths isn’t useful and it makes it unnecessarily long since it doesn’t convey any new information. The chosen verbs could vary by the developer’s whim. For instance, some like ‘get’ and some like ‘retrieve’, so it’s just better to let the HTTP GET verb tell us what an endpoint does.
+
+The action should be indicated by the HTTP request method that we’re making. The most common methods include GET, POST, PUT, and DELETE (CRUD operations.
+
+- GET retrieves resources.
+- POST submits new data to the server.
+- PUT updates existing data.
+- DELETE removes data.
 
