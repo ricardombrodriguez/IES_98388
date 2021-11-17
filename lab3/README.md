@@ -84,6 +84,42 @@ To run the application, we can type ```./mvnw spring-boot:run``` inside the proj
 
 
 
+**Postman**
+
+We can use the Postman utility to test our applications endpoints. We choose the HTTP method (GET, POST, ...), the type of the data and how we want it to be presented.
+
+Example: http://localhost:8080/api/v1/employees
+
+In the beginning, the list of employees is empty, so we must insert some rows.
+
+
+
+Insert:
+
+![image-20211116151508998](/home/ricardo/snap/typora/42/.config/Typora/typora-user-images/image-20211116151508998.png)
+
+
+
+GET BY ID:
+
+![image-20211116151609180](/home/ricardo/snap/typora/42/.config/Typora/typora-user-images/image-20211116151609180.png)
+
+GET EMPLOYEE BY EMAIL:
+
+![image-20211116151814043](/home/ricardo/snap/typora/42/.config/Typora/typora-user-images/image-20211116151814043.png)
+
+
+
+GET ALL EMPLOYEES:
+
+![image-20211116151640191](/home/ricardo/snap/typora/42/.config/Typora/typora-user-images/image-20211116151640191.png)
+
+
+
+We can do the rest of the operations mapped in the controller (update and delete employee).
+
+That being said, POSTMAN is very useful to test our REST API.
+
 
 
 
