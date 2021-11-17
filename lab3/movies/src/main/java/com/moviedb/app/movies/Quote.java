@@ -14,6 +14,7 @@ public class Quote {
     private int id;
     private String text;
     private Movie movie;
+
  
     public Quote() {
   
@@ -52,6 +53,10 @@ public class Quote {
     @Override
     public String toString() {
         return "Quote [id=" + id + ", text=" + text + ", movie=" + movie.getTitle() + "]";
+    }
+
+    public Quote orElse(Object object) {
+        return null;
     }
  
 }

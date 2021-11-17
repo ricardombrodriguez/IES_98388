@@ -34,12 +34,12 @@ public class MovieController {
 
     @GetMapping("/quote")
     public Quote getRandomQuote() {
-        return quoteRepository.findAll();
+        return quoteRepository.getRandomQuote();
     }
 
     @GetMapping("/quotes/{id}")
-    public Quote getRandomQuoteFromMovie() {
-        return quoteRepository.findAll();
+    public Quote getRandomQuoteFromMovie(@RequestParam(value="movie", required = true) int id) {
+        return quoteRepository.getRandomQuoteFromMovie(id);
     }
 
 }
