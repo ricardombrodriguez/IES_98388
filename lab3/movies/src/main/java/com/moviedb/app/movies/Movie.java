@@ -11,22 +11,22 @@ import javax.persistence.Table;
 @Table(name = "movies")
 public class Movie {
 
-    private long id;
+    private int id;
     private String title;
-    private long year;
+    private int year;
  
-    public Movie(String title, long year) {
+    public Movie(String title, int year) {
         this.title = title;
         this.year = year;
     }
  
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-        public long getId() {
+        public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
  
@@ -39,10 +39,10 @@ public class Movie {
     }
  
     @Column(name = "year", nullable = false)
-    public long getYear() {
+    public int getYear() {
         return year;
     }
-    public void setYear(long year) {
+    public void setYear(int year) {
         this.year = year;
     }
  

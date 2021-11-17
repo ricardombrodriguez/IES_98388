@@ -11,7 +11,7 @@ import javax.persistence.Table;
 @Table(name = "quotes")
 public class Quote {
 
-    private long id;
+    private int id;
     private String text;
     private Movie movie;
  
@@ -26,10 +26,10 @@ public class Quote {
  
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-        public long getId() {
+        public int getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
  

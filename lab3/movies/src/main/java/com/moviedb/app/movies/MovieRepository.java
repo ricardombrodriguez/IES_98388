@@ -1,13 +1,11 @@
 package com.moviedb.app.movies;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long>{
-    List<Movie> findMovieByTitle(String title);
+    Movie findMovieByTitle(String title);
+    Movie findMovieById(int id);
+    String deleteById(int id);
 }
