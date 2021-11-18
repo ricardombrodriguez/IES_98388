@@ -11,11 +11,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "quotes")
+@Table(name = "quote")
 public class Quote {
 
     private int id;
     private String text;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
  
@@ -44,11 +47,6 @@ public class Quote {
     public void setText(String text) {
         this.text = text;
     }
-
-    /*
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie", nullable = false)
-    */
     
     public Movie getMovie() {
         return this.movie;

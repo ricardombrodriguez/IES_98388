@@ -140,6 +140,37 @@ On the other side, @RestControllers is a specialized version of the @Controller 
 
 
 
+![image-20211118215332862](/home/ricardo/snap/typora/42/.config/Typora/typora-user-images/image-20211118215332862.png)
+
+
+
+**Entities**:
+
+- Movie.java -> Class representation of a Movie (it has an id, a title, a year and a list of Quotes)
+- Quote.java -> Class representation of a Quote (has id and a text)
+- ErrorDetails.java, GlobalExceptionHandler.java and ResourceNotFOundException -> Used for exception handling
+- MoviesApplication.java -> Configuration class that declares one or more @Bean methods and triggers auto-configuration
+
+
+
+**(REST) Controllers**:
+
+- MovieController -> An user makes an HTTP request, which will be mapped to an endpoint. This endpoint will send info to the *AllService.java* file, so that it can be processed.
+
+  
+
+**Services**:
+
+- Contains all the business logic. It's invoked by the controller and it will do all the requested funcionalities.
+
+
+
+**Repositories**
+
+- *MovieRepository.java* and *QuoteRepository.java* are responsible for interacting with databases to save and restore application data.
+
+
+
 #### C) Explain the annotations @Table, @Column, @Id found in the Employee entity.
 
 

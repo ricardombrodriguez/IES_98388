@@ -1,30 +1,25 @@
 package com.moviedb.app.movies;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 import java.util.List;
 
 @Entity
-@Table(name = "movies")
+@Table(name = "movie")
 public class Movie {
 
     private int id;
     private String title;
     private int year;
 
-    @OneToMany(cascade = CascadeType.ALL)  
-    @JoinColumn(name="movie_id")  
-    @OrderColumn(name="type")  
+    @OneToMany(targetEntity=Quote.class, mappedBy="movie", fetch=FetchType.EAGER)
     private List<Quote> quotes;
 
     public Movie(String title, int year) {
@@ -59,10 +54,6 @@ public class Movie {
     public void setYear(int year) {
         this.year = year;
     }
-
-    public List<Quote> getQuotes(){
-        return this.quotes;
-    }
  
     @Override
     public String toString() {
@@ -72,5 +63,10 @@ public class Movie {
     public Movie orElse(Object object) {
         return null;
     }
+
+    public List<Quote> getQuotes() {
+        return this.quotes;
+    }
+
  
 }
