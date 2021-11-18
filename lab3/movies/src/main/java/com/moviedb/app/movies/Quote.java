@@ -2,9 +2,12 @@ package com.moviedb.app.movies;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -41,10 +44,14 @@ public class Quote {
     public void setText(String text) {
         this.text = text;
     }
- 
-    @Column(name = "movie", nullable = false)
+
+    /*
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie", nullable = false)
+    */
+    
     public Movie getMovie() {
-        return movie;
+        return this.movie;
     }
     public void setMovie(Movie movie) {
         this.movie = movie;

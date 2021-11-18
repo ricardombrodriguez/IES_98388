@@ -122,5 +122,53 @@ That being said, POSTMAN is very useful to test our REST API.
 
 
 
+# Review questions
+
+
+
+#### A) Explain the differences between the RestController and Controller components used in different parts of this lab.
+
+
+
+The @Controller annotation is used to mark classes as Spring MVC controller. This one is used with a *@RequestMapping* annotation for request handling methods. Note that @GetMapping and @PostMapping annotations, very used in *lab03/ex1/*, are composed annotations that act as a shortcut for @RequestMapping with a specific HTTP method (GET, POST).
+
+On the other side, @RestControllers is a specialized version of the @Controller annotation that does nothing more than adding the @Controller and @ResponseBody annotations. Besides that, it also converts the response to JSON/XML automatically.
+
+
+
+#### B) Create a visualization of the Spring Boot layers (UML diagram or similar), displaying the key abstractions in the solution of 3.3, in particular: entities, repositories, services and REST controllers. Describe the role of the elements modeled in the diagram.
+
+
+
+#### C) Explain the annotations @Table, @Column, @Id found in the Employee entity.
+
+
+
+- @Table - Specifies the primary table for the annotated entity. If no Table annotation is specified for an entity class, the default values apply (in other words, the name of the class). In this lab, *Employees* table represents the *Employee* class.
+- @Column - Specifies the mapped column for a field. If no Column annotation is specified, the default values apply (name of the attribute). An *Employee* has many attributes. Each one of them constitutes a column in the *Employees* table ("first_name", "last_name", etc...).
+- @Id - Specifies the primary key of an entity. The field or property to which the Id annotation is normally an auto-generated incremented integer (just like it's in this lab). The mapped column for the primary key of the entity is assumed to be the primary key of the primary table. If no Column annotation is specified, the primary key column name is assumed to be the name of the primary key property or field!
+
+
+
+#### D) Explain the use of the annotation @AutoWired (in the Rest Controller class)
+
+
+
+In Spring, using autowiring instead of creating objects in our own, lets Spring create them, which can be very helpful. 
+
+```
+@Autowired
+private MovieRepository movieRepository;
+private QuoteRepository quoteRepository;
+```
+
+In the example above, the @Autowired annotation marks a field as to be autowired by Spring's dependency injection facilities.
+
+If we mark some class as a component, during initialization spring creates an instance of this class in its context. Later, when we want to use the object marked with @Autowired, Spring will inject this earlier created instance into our program. That being said, autowiring is a way of letting Spring resolve dependencies automatically instead of doing it manually, which is very time costly.
+
+
+
+
+
 
 

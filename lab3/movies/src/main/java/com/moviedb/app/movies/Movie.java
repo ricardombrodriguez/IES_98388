@@ -1,12 +1,15 @@
 package com.moviedb.app.movies;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
 import java.util.List;
@@ -19,9 +22,11 @@ public class Movie {
     private String title;
     private int year;
 
-    @OneToMany(targetEntity=Quote.class, mappedBy="quotes", fetch=FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)  
+    @JoinColumn(name="movie_id")  
+    @OrderColumn(name="type")  
     private List<Quote> quotes;
- 
+
     public Movie(String title, int year) {
         this.title = title;
         this.year = year;
